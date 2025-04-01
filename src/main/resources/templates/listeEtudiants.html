@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<head>
+	<meta charset="utf-8">
+	<title>Liste des Etudiants</title>
+</head>
+
+<body>
+	<div th:replace="template"></div>
+
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header">
+				Liste des Etudiants
+			</div>
+			<div class="card-body">
+
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Nom Etudiant</th>
+						<th>Prenom Etudiant </th>
+						<th>Moyenne</th>
+						<th>Date d'inscription</th>
+					</tr>
+					<tr th:each="p:${etudiants.content}">
+						<td th:text="${p.idEtudiant}"></td>
+						<td th:text="${p.nomEtudiant}"></td>
+						<td th:text="${p.prenomEtudiant}"></td>
+						<td th:text="${p.moyEtudiant}"></td>
+						<td th:text="${p.dateInscription}"></td>
+						<td><a onclick="return confirm('Etes-vous sûr ?')" class="btn btn-danger" th:href="@{supprimerEtudiant(id=${p.idEtudiant},
+ page=${currentPage},size=${size})}">Supprimer</a></td>
+
+					</tr>
+				</table>
+				<ul class="nav nav-pills">
+					<li th:each="page,status:${pages}">
+						<a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+							th:href="@{ listeEtudiants(page=${status.index}, size=${size} ) }"
+							th:text="${status.index }"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
