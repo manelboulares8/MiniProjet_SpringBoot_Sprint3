@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.manell.etudiants.entities.Etudiant;
+import com.manell.etudiants.entities.Institut;
 import com.manell.etudiants.repos.EtudiantRepository;
 
 @Service
@@ -49,6 +50,38 @@ public class EtudiantServiceImpl implements EtudiantService {
 	public Page<Etudiant> getAllEtudiantsParPage(int page,int size){
 		return etudiantRepository.findAll(PageRequest.of(page,size));
 	}
+	@Override
+    public List<Etudiant> findByNomEtudiant(String nom) {
+        return etudiantRepository.findByNomEtudiant(nom);
+    }
 
-	
+    @Override
+    public List<Etudiant> findByNomEtudiantContains(String nom) {
+        return etudiantRepository.findByNomEtudiantContains(nom);
+    }
+
+    @Override
+    public List<Etudiant> findByNomPrenom(String nom, String prenom) {
+        return etudiantRepository.findByNomPrenom(nom, prenom);
+    }
+
+    @Override
+    public List<Etudiant> findByInstitut(Institut institut) {
+        return etudiantRepository.findByInstitut(institut);
+    }
+
+    @Override
+    public List<Etudiant> findByInstitutIdIns(Long id) {
+        return etudiantRepository.findByInstitutIdInstitut(id);
+    }
+
+    @Override
+    public List<Etudiant> findByOrderByNomEtudiantAsc() {
+        return etudiantRepository.findByOrderByNomEtudiantAsc();
+    }
+
+    @Override
+    public List<Etudiant> trierEtudiantsNomsPrenoms() {
+        return etudiantRepository.trierEtudiantsNomsPrenoms();
+    }
 }

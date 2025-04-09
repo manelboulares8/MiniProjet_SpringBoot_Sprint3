@@ -1,5 +1,6 @@
 package com.manell.etudiants.entities;
 import java.util.Date;
+import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,9 @@ public class Etudiant {
 	private String prenomEtudiant;
 	private Double moyEtudiant;
 	private Date dateInscription;
+	@ManyToOne
+	private Institut institut;
+	
 	public Etudiant() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -59,6 +63,22 @@ public class Etudiant {
 	public String toString() {
 		return "Etudiant [idEtudiant=" + idEtudiant + ", nomEtudiant=" + nomEtudiant + ", prenomEtudiant="
 				+ prenomEtudiant + ", moyEtudiant=" + moyEtudiant + ", dateInscription=" + dateInscription + "]";
+	}
+	public Institut getInstitut() {
+		return institut;
+	}
+	public void setInstitut(Institut institut) {
+		this.institut = institut;
+	}
+	public Etudiant(Long idEtudiant, String nomEtudiant, String prenomEtudiant, Double moyEtudiant,
+			Date dateInscription, Institut institut) {
+		super();
+		this.idEtudiant = idEtudiant;
+		this.nomEtudiant = nomEtudiant;
+		this.prenomEtudiant = prenomEtudiant;
+		this.moyEtudiant = moyEtudiant;
+		this.dateInscription = dateInscription;
+		this.institut = institut;
 	}
 	
 }

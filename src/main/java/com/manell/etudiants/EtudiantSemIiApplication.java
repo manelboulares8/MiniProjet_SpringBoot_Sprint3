@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 import com.manell.etudiants.entities.Etudiant;
 import com.manell.etudiants.service.EtudiantService;
@@ -14,6 +15,8 @@ import com.manell.etudiants.service.EtudiantService;
 public class EtudiantSemIiApplication implements CommandLineRunner{
 	@Autowired
 	EtudiantService etudiantService;
+	@Autowired 
+	private RepositoryRestConfiguration repositoryRestConfiguration;
 	public static void main(String[] args) {
 		SpringApplication.run(EtudiantSemIiApplication.class, args);
 	}
@@ -26,6 +29,7 @@ public class EtudiantSemIiApplication implements CommandLineRunner{
 		etudiantService.saveEtudiant(new Etudiant("Makhlouf","Sarrah",16.43,new Date()));
 		etudiantService.saveEtudiant(new Etudiant("Guelbi","Farah",15.1,new Date()));
 */
+		repositoryRestConfiguration.exposeIdsFor(Etudiant.class); 
 	}
 
 }
