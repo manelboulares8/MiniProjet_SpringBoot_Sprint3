@@ -24,6 +24,8 @@
 						<th>Prenom Etudiant </th>
 						<th>Moyenne</th>
 						<th>Date d'inscription</th>
+						<th>Institut</th>
+
 					</tr>
 					<tr th:each="p:${etudiants.content}">
 						<td th:text="${p.idEtudiant}"></td>
@@ -31,8 +33,15 @@
 						<td th:text="${p.prenomEtudiant}"></td>
 						<td th:text="${p.moyEtudiant}"></td>
 						<td th:text="${p.dateInscription}"></td>
-						<td><a onclick="return confirm('Etes-vous sûr ?')" class="btn btn-danger" th:href="@{supprimerEtudiant(id=${p.idEtudiant},
- page=${currentPage},size=${size})}">Supprimer</a></td>
+						<td th:if= "${!#strings.isEmpty(p.institut)}" th:text="${p.institut.nomInstitut}"></td>
+						<td th:if= "${#strings.isEmpty(p.institut)}" th:text="${'Pas dinstitut'}"></td>
+						<td sec:authorize="hasAuthority('ADMIN')" ><a class="btn btn-danger"
+						onclick="return confirm('Etes-vous sûr ?')"
+						th:href="@{supprimerEtudiant(id=${p.idEtudiant},
+						page=${currentPage},size=${size})}">Supprimer</a>
+						</td>
+						<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success"
+						th:href="@{modifierEtudiant(id=${p.idEtudiant})}">Editer</a></td>
 
 					</tr>
 				</table>

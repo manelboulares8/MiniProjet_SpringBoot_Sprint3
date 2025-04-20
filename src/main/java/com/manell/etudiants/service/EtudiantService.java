@@ -22,4 +22,5 @@ public interface EtudiantService {
 	List<Etudiant> findByInstitutIdIns(Long id);
 	List<Etudiant> findByOrderByNomEtudiantAsc();
 	List<Etudiant> trierEtudiantsNomsPrenoms();
+	List<Institut> getAllInstituts();
 }

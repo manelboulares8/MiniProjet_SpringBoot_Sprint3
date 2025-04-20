@@ -1,18 +1,34 @@
 package com.manell.etudiants.entities;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 @Entity
+
 public class Etudiant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEtudiant;
+	@NotNull
+	@Size (min = 4,max = 15)
 	private String nomEtudiant;
+	@NotNull
+	@Size (min = 4,max = 15)
 	private String prenomEtudiant;
+	@Min(value = 0)
+	 @Max(value = 20)
 	private Double moyEtudiant;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateInscription;
 	@ManyToOne
 	private Institut institut;
@@ -80,5 +96,6 @@ public class Etudiant {
 		this.dateInscription = dateInscription;
 		this.institut = institut;
 	}
+	
 	
 }

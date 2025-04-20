@@ -10,13 +10,15 @@ import org.springframework.stereotype.Service;
 import com.manell.etudiants.entities.Etudiant;
 import com.manell.etudiants.entities.Institut;
 import com.manell.etudiants.repos.EtudiantRepository;
+import com.manell.etudiants.repos.InstitutRepository;
 
 @Service
 public class EtudiantServiceImpl implements EtudiantService {
 
     @Autowired
     EtudiantRepository etudiantRepository;
-
+    @Autowired
+    InstitutRepository institutRepository;
     @Override
     public Etudiant saveEtudiant(Etudiant e) {
         return etudiantRepository.save(e);
@@ -84,4 +86,9 @@ public class EtudiantServiceImpl implements EtudiantService {
     public List<Etudiant> trierEtudiantsNomsPrenoms() {
         return etudiantRepository.trierEtudiantsNomsPrenoms();
     }
+    @Override
+    public List<Institut> getAllInstituts(){
+    	return institutRepository.findAll();
+    }
+    
 }
