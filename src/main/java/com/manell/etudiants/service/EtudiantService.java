@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.manell.etudiants.dto.EtudiantDTO;
 import com.manell.etudiants.entities.Etudiant;
 import com.manell.etudiants.entities.Institut;
 
 public interface EtudiantService {
-	Etudiant saveEtudiant(Etudiant e);
-	Etudiant updateEtudiant(Etudiant e);
+	EtudiantDTO saveEtudiant(EtudiantDTO e);
+	EtudiantDTO updateEtudiant(EtudiantDTO e);
 	void deleteEtudiant(Etudiant e);
 	void deleteEtudiantById(Long id);
-	Etudiant getEtudiant(Long id);
-	List<Etudiant> getAllEtudiant();
+	EtudiantDTO getEtudiant(Long id);
+	List<EtudiantDTO> getAllEtudiant();
 	Page <Etudiant> getAllEtudiantsParPage(int page,int size);
 	List<Etudiant> findByNomEtudiant(String nom);
 	List<Etudiant> findByNomEtudiantContains(String nom);
@@ -23,4 +24,7 @@ public interface EtudiantService {
 	List<Etudiant> findByOrderByNomEtudiantAsc();
 	List<Etudiant> trierEtudiantsNomsPrenoms();
 	List<Institut> getAllInstituts();
+	EtudiantDTO convertEntityToDto (Etudiant etudiant);
+	Etudiant convertDtoToEntity (EtudiantDTO etudiantDto);
+
 }

@@ -41,7 +41,7 @@
 						page=${currentPage},size=${size})}">Supprimer</a>
 						</td>
 						<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success"
-						th:href="@{modifierEtudiant(id=${p.idEtudiant})}">Editer</a></td>
+						th:href="@{modifierEtudiant(id=${p.idEtudiant},page=${currentPage},size=${size})}">Editer</a></td>
 
 					</tr>
 				</table>

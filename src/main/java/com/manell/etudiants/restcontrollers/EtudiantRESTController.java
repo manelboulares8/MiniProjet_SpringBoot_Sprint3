@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.manell.etudiants.dto.EtudiantDTO;
 import com.manell.etudiants.entities.Etudiant;
 import com.manell.etudiants.service.EtudiantService;
 @RestController
@@ -16,23 +17,23 @@ import com.manell.etudiants.service.EtudiantService;
 public class EtudiantRESTController {
 	@Autowired
 	EtudiantService etudiantService;
-	@RequestMapping(method = RequestMethod.GET)
 	
-	public List<Etudiant> getAllEtudiants() {
+	@RequestMapping(method = RequestMethod.GET)
+	public List<EtudiantDTO> getAllEtudiants() {
 		return etudiantService.getAllEtudiant();
 		}
-
+	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public Etudiant getEtudiantById(@PathVariable("id") Long id) {
+	public EtudiantDTO getEtudiantById(@PathVariable("id") Long id) {
 	return etudiantService.getEtudiant(id);
 	 }
 	@RequestMapping(method = RequestMethod.POST)
-	public Etudiant createEtudiant(@RequestBody Etudiant etudiant) {
-	return etudiantService.saveEtudiant(etudiant);
+	public EtudiantDTO createEtudiant(@RequestBody EtudiantDTO etudiantDTO) {
+	return etudiantService.saveEtudiant(etudiantDTO);
 	}
 	@RequestMapping(method = RequestMethod.PUT)
-	public Etudiant updateEtudiant(@RequestBody Etudiant etudiant) {
-	return etudiantService.updateEtudiant(etudiant);
+	public EtudiantDTO updateEtudiant(@RequestBody EtudiantDTO etudiantDTO) {
+	return etudiantService.updateEtudiant(etudiantDTO);
 	}
 	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
 	public void deleteEtudiant(@PathVariable("id") Long id)

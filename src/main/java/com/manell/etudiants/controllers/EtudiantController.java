@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.*;
 
+import com.manell.etudiants.dto.EtudiantDTO;
 import com.manell.etudiants.entities.Etudiant;
 import com.manell.etudiants.entities.Institut;
 import com.manell.etudiants.service.EtudiantService;
@@ -22,11 +23,11 @@ import jakarta.validation.Valid;
 
 @Controller
 public class EtudiantController {
-	/*@RequestMapping("/myView")
+	@RequestMapping("/myView")
 	public String myView()
 	{
 	return "myView";
-	}*/
+	}
 	@Autowired
     EtudiantService etudiantService;
 
@@ -45,9 +46,9 @@ public class EtudiantController {
     @RequestMapping("/showCreate")
     public String showCreate(ModelMap modelMap) {
     	List<Institut> insts =etudiantService.getAllInstituts();
-    	modelMap.addAttribute("etudiant", new Etudiant());
+    	modelMap.addAttribute("etudiant", new EtudiantDTO());
     	modelMap.addAttribute("mode", "new");
-    	modelMap.addAttribute("Instituts",insts);
+    	modelMap.addAttribute("instituts",insts);
 
     	return "formEtudiant";    }
 
@@ -75,9 +76,9 @@ public class EtudiantController {
     	//return "formEtudiant";
     	return ("redirect:/listeEtudiants");
     }*/
-    @RequestMapping("/saveEtudiant")
+   @RequestMapping("/saveEtudiant")
     public String saveEtudiant(
-            @Valid Etudiant etudiant,
+            @Valid EtudiantDTO etudiant,
             BindingResult bindingResult,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "2") int size,
@@ -104,8 +105,6 @@ public class EtudiantController {
 
         return "redirect:/listeEtudiants?page=" + currentPage + "&size=" + size;
     }
-
-
     
     @RequestMapping("/supprimerEtudiant")
     public String supprimerEtudiant(@RequestParam("id") Long id, ModelMap modelMap,@RequestParam (name="page",defaultValue = "0") int page,
@@ -125,7 +124,7 @@ public class EtudiantController {
             @RequestParam(name = "size", defaultValue = "2") int size) {
     	List<Institut> insts =etudiantService.getAllInstituts();
 
-        Etudiant e = etudiantService.getEtudiant(id);
+        EtudiantDTO e = etudiantService.getEtudiant(id);
         modelMap.addAttribute("etudiant", e);
         modelMap.addAttribute("mode", "edit");
     	modelMap.addAttribute("instituts",insts);
@@ -137,7 +136,7 @@ public class EtudiantController {
     }
 
     @RequestMapping("/updateEtudiant")
-    public String updateEtudiant(@ModelAttribute("etudiant") Etudiant etudiant, 
+    public String updateEtudiant(@ModelAttribute("etudiant") EtudiantDTO etudiant, 
                                  @RequestParam("date") String date,
                                  ModelMap modelMap) throws ParseException {
         // Conversion de la date
@@ -146,7 +145,7 @@ public class EtudiantController {
         etudiant.setDateInscription(dateInscription);
 
         etudiantService.updateEtudiant(etudiant);
-        List<Etudiant> etds = etudiantService.getAllEtudiant();
+        List<EtudiantDTO> etds = etudiantService.getAllEtudiant();
         modelMap.addAttribute("etudiants", etds);
         return "listeEtudiants";
     }
